@@ -5,11 +5,6 @@
   // Immagine ufficiale Dev Containers con Node.js LTS (requisito di Expo)
   "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
 
-  // Metro bundler e build web: 4 core rendono il bundling più fluido
-  "hostRequirements": {
-    "cpus": 4
-  },
-
   "features": {
     // Claude Code CLI (feature ufficiale Anthropic)
     "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
