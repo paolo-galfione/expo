@@ -23,7 +23,7 @@
   //   collegare Expo Go sul telefono a un Codespace (non è nella tua rete locale)
   // - plugin Expo per Claude Code: Expo Skills + Expo MCP Server.
   //   "|| true" evita che il container fallisca se il plugin richiede prima il login
-  "postCreateCommand": "npm install -g @expo/ngrok && (claude plugin install expo@claude-plugins-official || true)",
+  "postCreateCommand": "npm install -g @expo/ngrok && (claude plugin install expo@anthropic-plugin-directory || true)",
 
   "customizations": {
     "vscode": {
