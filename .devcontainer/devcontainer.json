@@ -1,0 +1,55 @@
+{
+  // Repo didattico: imparare Expo / React Native con Claude Code in GitHub Codespaces
+  "name": "Expo + Claude Code",
+
+  // Immagine ufficiale Dev Containers con Node.js LTS (requisito di Expo)
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+
+  // Metro bundler e build web: 4 core rendono il bundling più fluido
+  "hostRequirements": {
+    "cpus": 4
+  },
+
+  "features": {
+    // Claude Code CLI (feature ufficiale Anthropic)
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {}
+  },
+
+  // 8081 = Metro bundler / Expo web (npx expo start --web)
+  "forwardPorts": [8081],
+  "portsAttributes": {
+    "8081": {
+      "label": "Metro / Expo Web",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // - @expo/ngrok: necessario per "npx expo start --tunnel", unico modo per
+  //   collegare Expo Go sul telefono a un Codespace (non è nella tua rete locale)
+  // - plugin Expo per Claude Code: Expo Skills + Expo MCP Server.
+  //   "|| true" evita che il container fallisca se il plugin richiede prima il login
+  "postCreateCommand": "npm install -g @expo/ngrok && (claude plugin install expo@claude-plugins-official || true)",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Necessarie
+        "anthropic.claude-code",        // Claude Code in VS Code
+        "expo.vscode-expo-tools",       // IntelliSense per app.json / eas.json, debug Expo
+        "dbaeumer.vscode-eslint",       // il template Expo usa ESLint (npx expo lint)
+
+        // Consigliate
+        "esbenp.prettier-vscode",       // formattazione
+        "msjsdiag.vscode-react-native"  // snippet e comandi React Native
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  }
+}
